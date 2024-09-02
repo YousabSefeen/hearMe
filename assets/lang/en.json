@@ -1,0 +1,21 @@
+{
+  "hearME" : "HearME",
+  "languages" : "Languages",
+  "warningMsg" : "Sign language will be shown based on your selected app language.",
+
+  "english" : "English",
+  "arabic" : "Arabic",
+  "signTo" : "Sign to Speech",
+  "toSign" : "To sign speech",
+  "startRecord" : "Start record",
+  "reRecord" : "Re-record",
+  "recorderIsEmptyMsg" : "Please, you must start recording to be able to translate",
+  "translate" : "Translate",
+
+  "signLanguage" : "Sign language guide",
+  "Community" : "Community",
+  "registration" : "Record",
+  "cancel" : "Cancel",
+  "capturedText" : "Captured text: "
+
+}
