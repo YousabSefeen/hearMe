@@ -10,6 +10,7 @@ import 'package:sign_language/UI/screens/to_sign_speech_screen.dart';
 
 import '../../core/constants/app_values_manager.dart';
 import '../../core/utils/custom_animation_route.dart';
+import '../speech to sign images/screens/speech_to_sign_images_screen.dart';
 
 class ToSignSpeechResultScreen extends StatefulWidget {
   final String path;
@@ -122,7 +123,7 @@ class _ToSignSpeechResultScreenState extends State<ToSignSpeechResultScreen> {
             ),
             onPressed: () => Navigator.of(context).pushAndRemoveUntil(
               CustomAnimationRoute(
-                screen: const ToSignSpeechScreen(),
+                screen: const SpeechToSignImagesScreen(),
                 isHomeScreen: false,
               ),
               (Route<dynamic> route) => false,

@@ -43,11 +43,14 @@ class ConvertVideoSignToTextSignProvider with ChangeNotifier {
               .post(AppValuesManager.stream, data: formData);
 
       if (response.statusCode == 200) {
+        print('statusCode: ${response.statusCode}');
+
         isLoading = false;
         displayText = response.data['text'];
 
         displayText ??= 'Video processing failed';
       } else {
+        print('statusCode: ${response.statusCode}');
         displayText = 'An Error Occurred';
         isLoading = false;
       }

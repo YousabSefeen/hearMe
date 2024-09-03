@@ -9,6 +9,7 @@ import 'package:sign_language/core/languages/controller/app_localizations.dart';
 import '../../core/languages/controller/language_provider.dart';
 import '../../core/utils/custom_animation_route.dart';
 import '../ConvertVideoSignToTextSignProvider/widgets/home_app_bar_actions.dart';
+import '../speech to sign images/screens/speech_to_sign_images_screen.dart';
 import 'sign_language_guide_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -52,7 +53,7 @@ class HomeScreen extends StatelessWidget {
             image: 'assets/images/toSign.png',
             onTap: () => Navigator.of(context).push(
               CustomAnimationRoute(
-                screen: const ToSignSpeechScreen(),
+                screen: const SpeechToSignImagesScreen(),
                 isHomeScreen: false,
               ),
             ),

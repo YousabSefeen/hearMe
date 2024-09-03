@@ -63,7 +63,7 @@ class LightMode {
           ),
         ),
       ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
+      /*elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
           textStyle: MaterialStateProperty.all(GoogleFonts.atma(
             fontSize: 16.sp,
@@ -82,8 +82,17 @@ class LightMode {
           padding: MaterialStateProperty.all(
               EdgeInsets.symmetric(vertical: 5.h, horizontal: 15.w)),
         ),
-      ),
-
+      ),*/
+elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+        backgroundColor: const MaterialStatePropertyAll(Colors.green),
+        foregroundColor: const MaterialStatePropertyAll(Colors.white),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+        ))
+),
       popupMenuTheme: PopupMenuThemeData(
         color: Colors.white,
         shape: RoundedRectangleBorder(
