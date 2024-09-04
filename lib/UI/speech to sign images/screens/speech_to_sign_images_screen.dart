@@ -11,9 +11,6 @@ import 'package:sign_language/UI/speech%20to%20sign%20images/widgets/build_trans
 import 'package:sign_language/core/languages/controller/app_localizations.dart';
 
 import '../../../controller/speech_to_sign_images_provider.dart';
-import '../../../core/languages/controller/language_provider.dart';
-import '../../../core/utils/custom_animation_route.dart';
-import '../../screens/home_screen.dart';
 
 class SpeechToSignImagesScreen extends StatelessWidget {
   const SpeechToSignImagesScreen({super.key});
@@ -53,17 +50,13 @@ class SpeechToSignImagesScreen extends StatelessWidget {
                   children: [
                     buildRecordingButton(context),
                     const SizedBox(width: 10),
-
                     const BuildRecordingControlButton(),
-
-
                   ],
                 ),
               ),
               const Spacer(),
               const BuildTranslateButton(),
-            SizedBox(height: 40.h),
-
+              SizedBox(height: 40.h),
             ],
           ),
         ),
@@ -85,6 +78,4 @@ class SpeechToSignImagesScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }

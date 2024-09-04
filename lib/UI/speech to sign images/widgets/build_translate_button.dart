@@ -14,7 +14,7 @@ class BuildTranslateButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => context
             .read<SpeechToSignImagesProvider>()
-            .sendSpeechToModelAi(context),
+            .handleTranslateAction(context),
         style: const ButtonStyle(
           padding: WidgetStatePropertyAll(
               EdgeInsets.symmetric(vertical: 12, horizontal: 15)),

@@ -9,27 +9,26 @@ class BuildRecordingControlButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<SpeechToSignImagesProvider>(
-        builder: (context, values, _) => CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.white,
-              child: IconButton(
-                  onPressed: () {
-                    values.isRecording = false;
+      builder: (context, values, _) => CircleAvatar(
+        radius: 20,
+        backgroundColor: Colors.white,
+        child: IconButton(
+          onPressed: () {
+            values.isRecording = false;
 
-                    values.isPaused ? values.resume() : values.pause();
-                  },
-                  icon: Icon(
-                    !values.isPaused && values.isRecordingNow
-                        ? Icons.pause
-                        : Icons.play_arrow,
-                    size: 22.sp,
-                    color: !values.isPaused && values.isRecordingNow
-                        ? Colors.blue
-                        : Colors.green,
-                  )),
-            ));
-
+            values.isPaused ? values.resume() : values.pause();
+          },
+          icon: Icon(
+            !values.isPaused && values.isRecordingNow
+                ? Icons.pause
+                : Icons.play_arrow,
+            size: 22.sp,
+            color: !values.isPaused && values.isRecordingNow
+                ? Colors.blue
+                : Colors.green,
+          ),
+        ),
+      ),
+    );
   }
-
-
 }

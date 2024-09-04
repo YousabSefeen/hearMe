@@ -1,14 +1,19 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sound_record/flutter_sound_record.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart' as ap;
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sign_language/core/languages/controller/app_localizations.dart';
+import 'package:sign_language/core/utils/app_alerts.dart';
 
-import '../UI/screens/to_sign_speech_result_screen.dart';
+import '../UI/speech to sign images/screens/speech_to_sign_images_result_screen.dart';
+import '../core/constants/app_values_manager.dart';
 import '../core/utils/custom_animation_route.dart';
 
 class SpeechToSignImagesProvider with ChangeNotifier {
@@ -104,11 +109,10 @@ class SpeechToSignImagesProvider with ChangeNotifier {
     });
   }
 
-  translateSpeech(BuildContext context) async {
+  Future<void> handleTranslateAction(BuildContext context) async {
     if (!isClicked) {
-      _customSnackBar(
+      AppAlerts.customSnackBar(
         context: context,
-        msg: 'recorderIsEmptyMsg'.translate(context),
       );
     } else {
       await stop();
@@ -116,71 +120,106 @@ class SpeechToSignImagesProvider with ChangeNotifier {
       audioSource = ap.AudioSource.uri(Uri.parse(path!));
 
       if (context.mounted) {
-        Navigator.of(context).push(
-          CustomAnimationRoute(
-            screen: ToSignSpeechResultScreen(
-              path: path!,
-            ),
-            isHomeScreen: false,
-          ),
-        );
+        handleRecordingCompletion(context);
+      }
+    }
+  }
+
+  ///******** result
+
+  List<String> recorderImagesResult = [];
+  List<String> recorderImagesFinalResult = [];
+  bool isLoading = false;
+
+  Future<void> handleRecordingCompletion(BuildContext context) async {
+    Navigator.of(context).push(
+      CustomAnimationRoute(
+          screen: const ToSignSpeechResultScreen(), isHomeScreen: false),
+    );
+    handlePermissions();
+    await uploadRecordToModelAi();
+    notifyListeners();
+  }
+
+  handlePermissions() async {
+    await Permission.storage.request().then((status) {
+      if (status == PermissionStatus.granted) {
+        // لديك إذن للوصول إلى التخزين
+        print('لديك إذن للوصول إلى التخزين');
+      } else {
+        // لا تملك إذنًا للوصول إلى التخزين
+        print('لا تملك إذنًا للوصول إلى التخزين');
+      }
+    });
+  }
+
+  Future<void> uploadRecordToModelAi() async {
+    if (kDebugMode) {
+      print(path);
+    }
+
+    isLoading = true;
+
+    try {
+      FormData formData =
+          FormData.fromMap({'file': await MultipartFile.fromFile(path!)});
+
+      Response response =
+          await Dio(BaseOptions(connectTimeout: const Duration(minutes: 10)))
+              .post(AppValuesManager.reverse, data: formData);
+      if (response.statusCode == 200) {
+        if (response.data['images'] != null) {
+          List<dynamic> images = response.data['images'];
+          for (var image in images) {
+            recorderImagesResult.add(image);
+          }
+          if (kDebugMode) {
+            print('Print ${response.data}');
+            print('recorderImagesResult $recorderImagesResult');
+          }
+        } else {
+          if (kDebugMode) {
+            print('Data isNull ${response.data}');
+          }
+        }
+      }
+      await getResultFromModelAi();
+    } catch (e) {
+      isLoading = false;
+
+      if (kDebugMode) {
+        print('An Error Occurred: $e');
+      }
+    }
+  }
+
+  Future<void> getResultFromModelAi() async {
+    try {
+      for (var image in recorderImagesResult) {
+        Response response =
+            await Dio(BaseOptions(connectTimeout: const Duration(minutes: 10)))
+                .get('${AppValuesManager.baseUrl}/public/$image');
+        if (response.statusCode == 200 && response.data != null) {
+          if (kDebugMode) {
+            print('Get Result:  ${response.data}');
+          }
+          recorderImagesFinalResult.add(image);
+        }
+      }
+      if (kDebugMode) {
+        print(
+            'recorderImagesFinalResult:  ${recorderImagesFinalResult.length}');
+      }
+
+      isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      isLoading = false;
+
+      if (kDebugMode) {
+        print('An Error Occurred in Get Function: $e');
       }
       notifyListeners();
     }
-  }
-
-  Future<void> sendSpeechToModelAi(BuildContext context) async {
-    if (!isClicked) {
-      _customSnackBar(
-        context: context,
-        msg: 'recorderIsEmptyMsg'.translate(context),
-      );
-    } else {
-      await stop();
-
-      audioSource = ap.AudioSource.uri(Uri.parse(path!));
-
-      if (context.mounted) {
-        Navigator.of(context).push(
-          CustomAnimationRoute(
-            screen: ToSignSpeechResultScreen(
-              path: path!,
-            ),
-            isHomeScreen: false,
-          ),
-        );
-      }
-    }
-  }
-
-  _customSnackBar({
-    required BuildContext context,
-    required String msg,
-  }) {
-    SnackBar sB = SnackBar(
-      padding: const EdgeInsets.all(5),
-      clipBehavior: Clip.antiAlias,
-      content: Text(
-        msg,
-        textAlign: TextAlign.center,
-        style: GoogleFonts.raleway(
-          textStyle: TextStyle(
-            fontSize: 18.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-      duration: const Duration(seconds: 3),
-      backgroundColor: Colors.red,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-        top: Radius.circular(20.r),
-      )),
-    );
-
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(sB);
   }
 }
