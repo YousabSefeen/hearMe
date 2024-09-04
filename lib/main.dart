@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:sign_language/UI/screens/to_sign_speech_screen.dart';
+
 import 'package:sign_language/controller/speech_to_sign_images_provider.dart';
 
-import 'UI/ConvertVideoSignToTextSignProvider/screens/convert_video_sign _to_text_sign_result_screen.dart';
 import 'UI/screens/splash_screen.dart';
 import 'UI/speech to sign images/screens/speech_to_sign_images_screen.dart';
 import 'controller/convert_video_sign _to_text_sign_provider.dart';
@@ -71,8 +70,10 @@ class MyApp extends StatelessWidget {
           theme: LightMode.mode(
               context: context, isEnglish: values.languageCode == 'en'),
           themeMode: ThemeMode.light,
-         /// home: const SplashScreen(),
-          home: const SpeechToSignImagesScreen(),
+
+          home: const SplashScreen(),
+
+          ///  home: const SpeechToSignImagesScreen(),
 
           routes: AppRouters.routes,
         ),

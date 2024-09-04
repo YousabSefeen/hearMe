@@ -18,7 +18,8 @@ class LightMode {
     900: Color(0xffFBA834),
   });
 
-  static ThemeData mode({required BuildContext context,required bool isEnglish}) {
+  static ThemeData mode(
+      {required BuildContext context, required bool isEnglish}) {
     return ThemeData(
       // highlightColor:Colors.black,  Scrollbar color
       primaryColor: AppColorsManager.white,
@@ -58,8 +59,7 @@ class LightMode {
             color: AppColorsManager.white,
             fontWeight: FontWeight.w800,
             fontSize: 30.sp,
-
-              letterSpacing: isEnglish ? 2 : 0,
+            letterSpacing: isEnglish ? 2 : 0,
           ),
         ),
       ),
@@ -83,16 +83,15 @@ class LightMode {
               EdgeInsets.symmetric(vertical: 5.h, horizontal: 15.w)),
         ),
       ),*/
-elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-        backgroundColor: const MaterialStatePropertyAll(Colors.green),
-        foregroundColor: const MaterialStatePropertyAll(Colors.white),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-        ))
-),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor: const MaterialStatePropertyAll(Colors.green),
+              foregroundColor: const MaterialStatePropertyAll(Colors.white),
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+              ))),
       popupMenuTheme: PopupMenuThemeData(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -124,26 +123,23 @@ elevatedButtonTheme: ElevatedButtonThemeData(
         contentPadding: EdgeInsets.zero,
       ),
       textTheme: TextTheme(
-        bodyLarge:  GoogleFonts.abel(
+        bodyLarge: GoogleFonts.abel(
           color: Colors.black,
           fontSize: 18.sp,
           fontWeight: isEnglish ? FontWeight.w900 : FontWeight.w800,
           letterSpacing: isEnglish ? 1.5 : 0,
         ),
         bodyMedium: TextStyle(
-
           fontWeight: FontWeight.w800,
           color: Colors.white,
           fontSize: isEnglish ? 15.sp : 18.sp,
           letterSpacing: isEnglish ? 1 : 0,
         ),
-        titleMedium:  TextStyle(
+        titleMedium: TextStyle(
           fontSize: 17.sp,
           color: Colors.black,
           letterSpacing: 0.5,
           fontWeight: FontWeight.w700,
-
-
         ),
         titleSmall: TextStyle(
           fontSize: 12.sp,
@@ -153,9 +149,7 @@ elevatedButtonTheme: ElevatedButtonThemeData(
         titleLarge: GoogleFonts.atma(
           color: Colors.blue,
           fontSize: 18.sp,
-          fontWeight: isEnglish
-              ? FontWeight.w700
-              : FontWeight.w800,
+          fontWeight: isEnglish ? FontWeight.w700 : FontWeight.w800,
         ),
       ),
 

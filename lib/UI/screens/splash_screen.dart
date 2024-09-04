@@ -5,7 +5,6 @@ import 'package:lottie/lottie.dart';
 
 import 'home_screen.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -17,7 +16,7 @@ class _SplashScreen extends State<SplashScreen> {
   late Timer _time;
 
   start() {
-    _time = Timer(const Duration(seconds:6), call);
+    _time = Timer(const Duration(seconds: 6), call);
   }
 
   void call() {

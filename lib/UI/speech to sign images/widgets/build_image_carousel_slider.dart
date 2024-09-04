@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../../../core/constants/app_values_manager.dart';
 
 class BuildImageCarouselSlider extends StatelessWidget {

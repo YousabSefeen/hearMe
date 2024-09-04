@@ -125,8 +125,6 @@ class SpeechToSignImagesProvider with ChangeNotifier {
     }
   }
 
-  ///******** result
-
   List<String> recorderImagesResult = [];
   List<String> recorderImagesFinalResult = [];
   bool isLoading = false;
@@ -144,11 +142,9 @@ class SpeechToSignImagesProvider with ChangeNotifier {
   handlePermissions() async {
     await Permission.storage.request().then((status) {
       if (status == PermissionStatus.granted) {
-        // لديك إذن للوصول إلى التخزين
-        print('لديك إذن للوصول إلى التخزين');
+        print('You have permission to access storage.');
       } else {
-        // لا تملك إذنًا للوصول إلى التخزين
-        print('لا تملك إذنًا للوصول إلى التخزين');
+        print('You do not have permission to access storage.');
       }
     });
   }
