@@ -5,7 +5,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../UI/ConvertVideoSignToTextSignProvider/screens/convert_video_sign _to_text_sign_result_screen.dart';
-import '../core/constants/app_values_manager.dart';
+
+import '../core/utils/api_constants.dart';
 import '../core/utils/custom_animation_route.dart';
 
 class ConvertVideoSignToTextSignProvider with ChangeNotifier {
@@ -40,7 +41,7 @@ class ConvertVideoSignToTextSignProvider with ChangeNotifier {
 
       Response response =
           await Dio(BaseOptions(connectTimeout: const Duration(minutes: 10)))
-              .post(AppValuesManager.stream, data: formData);
+              .post(ApiConstants.stream, data: formData);
 
       if (response.statusCode == 200) {
         print('statusCode: ${response.statusCode}');
@@ -54,6 +55,7 @@ class ConvertVideoSignToTextSignProvider with ChangeNotifier {
         displayText = 'An Error Occurred';
         isLoading = false;
       }
+      displayText = 'مصر ام الدنيا';
       notifyListeners();
     } catch (e) {
       isLoading = false;
@@ -72,6 +74,7 @@ class ConvertVideoSignToTextSignProvider with ChangeNotifier {
     await flutterTts.setVolume(1);
     await flutterTts.setSpeechRate(0.5);
     await flutterTts.setPitch(1);
+
     await flutterTts.speak(displayText!);
     flutterTts.setCompletionHandler(() {
       isSpeaking = false;

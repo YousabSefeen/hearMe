@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/constants/app_values_manager.dart';
+import '../../../core/utils/api_constants.dart';
 
 class BuildImageCarouselSlider extends StatelessWidget {
   final int itemCount;
@@ -45,7 +45,7 @@ class BuildImageCarouselSlider extends StatelessWidget {
           image: DecorationImage(
               fit: BoxFit.contain,
               image: NetworkImage(
-                '${AppValuesManager.baseUrl}/public/${images[itemIndex]}',
+                '${ApiConstants.baseUrl}/public/${images[itemIndex]}',
               )),
         ),
         child: Text(itemIndex.toString()),

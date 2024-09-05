@@ -5,8 +5,9 @@ import 'package:provider/provider.dart';
 
 import 'package:sign_language/controller/speech_to_sign_images_provider.dart';
 
-import 'UI/screens/splash_screen.dart';
-import 'UI/speech to sign images/screens/speech_to_sign_images_screen.dart';
+
+
+import 'UI/home/splash_screen.dart';
 import 'controller/convert_video_sign _to_text_sign_provider.dart';
 import 'core/languages/controller/app_localizations.dart';
 import 'core/languages/controller/language_provider.dart';
@@ -43,7 +44,6 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, _) => Consumer<LanguageProvider>(
         builder: (context, values, _) => MaterialApp(
-          useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
           locale: values.languageCode == 'en'
               ? const Locale('en')

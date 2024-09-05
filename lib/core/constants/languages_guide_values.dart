@@ -1,14 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:sign_language/core/languages/controller/app_localizations.dart';
-
-import '../../core/languages/controller/language_provider.dart';
-
-class SignLanguageGuideScreen extends StatelessWidget {
-  SignLanguageGuideScreen({super.key});
-
-  List<LanguagesGuideModel> arabicLan = [
+class LanguagesGuideValues {
+  static List<LanguagesGuideModel> getArabicLanguageGuide = [
     LanguagesGuideModel(image: 'assets/images/back/0.jpg', title: 'أ'),
     LanguagesGuideModel(image: 'assets/images/back/1.jpg', title: 'ب'),
     LanguagesGuideModel(image: 'assets/images/back/2.jpeg', title: 'ت'),
@@ -38,7 +29,7 @@ class SignLanguageGuideScreen extends StatelessWidget {
     LanguagesGuideModel(image: 'assets/images/back/26.jpg', title: 'و'),
     LanguagesGuideModel(image: 'assets/images/back/27.jpg', title: 'ي'),
   ];
-  List<LanguagesGuideModel> englishLan = [
+  static List<LanguagesGuideModel> getEnglishLanguageGuide = [
     LanguagesGuideModel(
         image: 'assets/images/english_letters/1.jpeg', title: 'A'),
     LanguagesGuideModel(
@@ -92,67 +83,6 @@ class SignLanguageGuideScreen extends StatelessWidget {
     LanguagesGuideModel(
         image: 'assets/images/english_letters/26.jpeg', title: 'Z'),
   ];
-
-  @override
-  Widget build(BuildContext context) {
-    final isEnglish =
-        Provider.of<LanguageProvider>(context).languageCode == 'en';
-    return Scaffold(
-      backgroundColor: Colors.white.withOpacity(isEnglish ? 0.93 : 1),
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        elevation: 0,
-        title: Text(
-          'signLanguage'.translate(context),
-          style: Theme.of(context).appBarTheme.titleTextStyle!.copyWith(
-                fontSize: 25.sp,
-              ),
-        ),
-      ),
-      body: GridView.builder(
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: 3 / 4.5,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-        ),
-        itemCount: isEnglish ? englishLan.length : arabicLan.length,
-        itemBuilder: (BuildContext context, int index) => Card(
-          margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
-          color: Colors.grey,
-          elevation: 8,
-          shadowColor: Colors.black,
-          child: GridTile(
-            footer: Container(
-              padding: const EdgeInsets.only(top: 5),
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Text(
-                isEnglish ? englishLan[index].title : arabicLan[index].title,
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w900,
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12.r),
-              child: Image.asset(
-                isEnglish ? englishLan[index].image : arabicLan[index].image,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
 
 class LanguagesGuideModel {

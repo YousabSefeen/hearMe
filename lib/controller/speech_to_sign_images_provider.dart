@@ -1,19 +1,19 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:flutter_sound_record/flutter_sound_record.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:just_audio/just_audio.dart' as ap;
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sign_language/core/languages/controller/app_localizations.dart';
+
 import 'package:sign_language/core/utils/app_alerts.dart';
 
 import '../UI/speech to sign images/screens/speech_to_sign_images_result_screen.dart';
-import '../core/constants/app_values_manager.dart';
+
+import '../core/utils/api_constants.dart';
 import '../core/utils/custom_animation_route.dart';
 
 class SpeechToSignImagesProvider with ChangeNotifier {
@@ -162,7 +162,7 @@ class SpeechToSignImagesProvider with ChangeNotifier {
 
       Response response =
           await Dio(BaseOptions(connectTimeout: const Duration(minutes: 10)))
-              .post(AppValuesManager.reverse, data: formData);
+              .post(ApiConstants.reverse, data: formData);
       if (response.statusCode == 200) {
         if (response.data['images'] != null) {
           List<dynamic> images = response.data['images'];
@@ -194,7 +194,7 @@ class SpeechToSignImagesProvider with ChangeNotifier {
       for (var image in recorderImagesResult) {
         Response response =
             await Dio(BaseOptions(connectTimeout: const Duration(minutes: 10)))
-                .get('${AppValuesManager.baseUrl}/public/$image');
+                .get('${ApiConstants.baseUrl}/public/$image');
         if (response.statusCode == 200 && response.data != null) {
           if (kDebugMode) {
             print('Get Result:  ${response.data}');
