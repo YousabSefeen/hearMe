@@ -184,7 +184,7 @@ class SpeechToSignImagesProvider with ChangeNotifier {
       isLoading = false;
 
       if (kDebugMode) {
-        print('An Error Occurred: $e');
+        print('An Error Occurred in uploadRecordToModelAi: $e');
       }
     }
   }
@@ -213,7 +213,7 @@ class SpeechToSignImagesProvider with ChangeNotifier {
       isLoading = false;
 
       if (kDebugMode) {
-        print('An Error Occurred in Get Function: $e');
+        print('An Error Occurred in getResultFromModelAi: $e');
       }
       notifyListeners();
     }
