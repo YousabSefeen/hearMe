@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -13,29 +11,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreen extends State<SplashScreen> {
-  late Timer _time;
-
-  start() {
-    _time = Timer(const Duration(seconds: 6), call);
-  }
-
-  void call() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
-    );
-  }
-
   @override
   void initState() {
-    start();
     super.initState();
+    navigateToHomeAfterDelay();
   }
 
-  @override
-  void dispose() {
-    _time.cancel();
-    super.dispose();
+  void navigateToHomeAfterDelay() {
+    Future.delayed(
+      const Duration(seconds: 6),
+      () {
+        if (mounted) {
+          return Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -43,8 +36,10 @@ class _SplashScreen extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-          child: Lottie.network(
-              'https://assets3.lottiefiles.com/packages/lf20_kbfzivr8.json')),
+        child: Lottie.network(
+          'https://assets3.lottiefiles.com/packages/lf20_kbfzivr8.json',
+        ),
+      ),
     );
   }
 }

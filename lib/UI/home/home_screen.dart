@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sign_language/UI/ConvertVideoSignToTextSignProvider/screens/convert_video_sign _to_text_sign_screen.dart';
 import 'package:sign_language/core/languages/controller/app_localizations.dart';
 
-import '../../core/languages/controller/language_provider.dart';
 import '../../core/utils/custom_animation_route.dart';
 import '../ConvertVideoSignToTextSignProvider/widgets/home_app_bar_actions.dart';
 import '../speech to sign images/screens/speech_to_sign_images_screen.dart';
@@ -17,9 +15,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isEnglish =
-        Provider.of<LanguageProvider>(context, listen: false).languageCode ==
-            'en';
     return Scaffold(
       appBar: AppBar(
         leading: Container(
@@ -64,7 +59,7 @@ class HomeScreen extends StatelessWidget {
             image: 'assets/images/signLanguage.png',
             onTap: () => Navigator.of(context).push(
               CustomAnimationRoute(
-                screen: SignLanguageGuideScreen(),
+                screen: const SignLanguageGuideScreen(),
                 isHomeScreen: false,
               ),
             ),
