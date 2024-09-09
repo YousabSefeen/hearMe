@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_language/controller/speech_to_sign_images_provider.dart';
 import 'package:sign_language/core/languages/controller/app_localizations.dart';
 

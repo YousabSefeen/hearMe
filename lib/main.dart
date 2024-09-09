@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
 
           home: const SplashScreen(),
 
-          ///  home: const SpeechToSignImagesScreen(),
+
 
           routes: AppRouters.routes,
         ),

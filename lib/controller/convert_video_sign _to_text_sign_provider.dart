@@ -55,7 +55,7 @@ class ConvertVideoSignToTextSignProvider with ChangeNotifier {
         displayText = 'An Error Occurred';
         isLoading = false;
       }
-      displayText = 'مصر ام الدنيا';
+
       notifyListeners();
     } catch (e) {
       isLoading = false;
